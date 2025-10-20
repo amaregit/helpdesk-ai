@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HelpDesk AI
 
-## Getting Started
+A Next.js-based chat application with RAG (Retrieval-Augmented Generation) capabilities for answering questions about documentation.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 💬 Clean chat interface with streaming responses
+- 🔍 RAG pipeline with BM25 retrieval
+- 📚 Citation of source documents
+- 🎯 Context-aware responses
+- ⚡ Built with Next.js 14 and TypeScript
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone and install dependencies:**
+   ```bash
+   npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Environment variables:**
+   Create a `.env.local` file with:
+   ```bash
+   OPENAI_API_KEY=your_openai_api_key_optional
+   ADMIN_PASSWORD=admin_password
+   ```
 
-## Learn More
+3. **Run the application:**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 💬 Clean chat interface with streaming responses
+- 🔍 RAG pipeline with BM25 retrieval
+- 📚 Citation of source documents
+- 🎯 Context-aware responses
+- ⚡ Built with Next.js 14 and TypeScript
+- 🔐 Admin panel with authentication
+- 📊 Usage monitoring and analytics
+- 📁 File upload for knowledge base management
+- 🧪 Automated evaluation system
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Admin Panel
 
-## Deploy on Vercel
+Access the admin panel at `/admin` with password authentication. Features include:
+- Document re-indexing
+- File upload for new knowledge base documents
+- System evaluation and testing
+- Usage monitoring and statistics
+- Performance metrics
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `POST /api/chat` - Chat with streaming responses
+- `GET /api/index` - Get index status
+- `POST /api/index` - Reindex documents (admin)
+- `GET /api/eval` - Run evaluation tests (admin)
+- `POST /api/upload` - Upload documents (admin)
+- `GET /api/monitoring` - Get usage stats (admin)
+- `POST /api/monitoring` - Reset stats (admin)
