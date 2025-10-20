@@ -19,7 +19,7 @@ A complete RAG (Retrieval-Augmented Generation) chat application built with Next
 
 1. **Clone and install dependencies:**
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/helpdesk-ai.git](https://github.com/amaregit/helpdesk-ai.git)
+   git clone [https://github.com/amaregit/helpdesk-ai.git]
    cd helpdesk-ai
    npm install
 
