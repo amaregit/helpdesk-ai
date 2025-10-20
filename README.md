@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT-412991?style=for-the-badge&logo=openai)
 
-A Next.js-based chat application with RAG (Retrieval-Augmented Generation) capabilities for answering questions about documentation.
+A complete RAG (Retrieval-Augmented Generation) chat application built with Next.js 14, TypeScript, and Tailwind CSS for answering questions about documentation.
 
 ## Features
 
@@ -19,6 +19,8 @@ A Next.js-based chat application with RAG (Retrieval-Augmented Generation) capab
 
 1. **Clone and install dependencies:**
    ```bash
+   git clone [https://github.com/YOUR_USERNAME/helpdesk-ai.git](https://github.com/amaregit/helpdesk-ai.git)
+   cd helpdesk-ai
    npm install
 
 2. **Environment variables:**
