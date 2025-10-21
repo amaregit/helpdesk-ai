@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Message as MessageType, Citation } from '@/lib/types';
 import Message from './Message';
 import ChatInput from './ChatInput';
-import { Bot, MessageSquare } from 'lucide-react';
+import { Bot, MessageSquare, MessageCircle } from 'lucide-react';
 
 export default function Chat() {
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -137,27 +137,29 @@ export default function Chat() {
   return (
     <div className="flex max-w-6xl  flex-col h-full w-full bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 sm:p-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-white/20 rounded-lg">
-              <Bot className="h-6 w-6" />
+          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+            <div className="p-1.5 sm:p-2 bg-white/20 rounded-lg flex-shrink-0">
+              <Bot className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold">HelpDesk Assistant</h1>
-              <p className="text-blue-100 text-sm">Powered by AI + RAG</p>
+            <div className="min-w-0 flex-1">
+              <h1 className="text-lg sm:text-xl font-bold truncate">HelpDesk Assistant</h1>
+              <p className="text-blue-100 text-xs sm:text-sm truncate">Powered by AI + RAG</p>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-sm bg-white/20 px-3 py-1 rounded-full">
-              {messages.length} messages
+          <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 flex-shrink-0">
+            <div className="text-xs sm:text-sm bg-white/20 px-2 sm:px-3 py-1 rounded-full flex items-center space-x-1">
+              <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">{messages.length} messages</span>
+              <span className="sm:hidden">{messages.length}</span>
             </div>
             {messages.length > 0 && (
               <button
                 onClick={clearChat}
-                className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full transition-colors"
+                className="text-xs sm:text-sm bg-white/20 hover:bg-white/30 px-2 sm:px-3 py-1 rounded-full transition-colors"
               >
-                Clear Chat
+                Clear
               </button>
             )}
           </div>
@@ -165,7 +167,7 @@ export default function Chat() {
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 h-full overflow-y-auto p-6 space-y-6 max-w-6xl mx-auto w-full">
+      <div className="flex-1 h-full overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-6xl mx-auto w-full">
         <div className="max-w-6xl mx-auto w-full space-y-6">
 
           {messages.length === 0 && (
@@ -243,7 +245,7 @@ export default function Chat() {
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-gray-200 p-6 bg-gray-50">
+      <div className="border-t border-gray-200 p-4 sm:p-6 bg-gray-50">
         <ChatInput onSendMessage={handleSendMessage} disabled={isLoading} />
         <div className="text-xs text-gray-500 text-center mt-3">
           Ask about pricing, refunds, or getting started. I&apos;ll find the right information for you.
