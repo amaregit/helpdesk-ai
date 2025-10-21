@@ -10,6 +10,7 @@ interface ChatInputProps {
 
 export default function ChatInput({ onSendMessage, disabled = false }: ChatInputProps) {
   const [message, setMessage] = useState('');
+  const [placeholder, setPlaceholder] = useState('Type your question... (Enter to send)');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -33,6 +34,19 @@ export default function ChatInput({ onSendMessage, disabled = false }: ChatInput
       }
     }
   }, [message]);
+
+  useEffect(() => {
+    const updatePlaceholder = () => {
+      if (typeof window !== 'undefined') {
+        const isMobile = window.innerWidth < 768;
+        setPlaceholder(isMobile ? 'Ask a question...' : 'Type your question... (Enter to send)');
+      }
+    };
+
+    updatePlaceholder();
+    window.addEventListener('resize', updatePlaceholder);
+    return () => window.removeEventListener('resize', updatePlaceholder);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,10 +89,10 @@ export default function ChatInput({ onSendMessage, disabled = false }: ChatInput
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type your question here... (Press Enter to send)"
+          placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white disabled:bg-gray-100 disabled:cursor-not-allowed transition-all duration-200"
+          className="w-full px-2 py-3 pr-12 border border-gray-300 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white disabled:bg-gray-100 disabled:cursor-not-allowed transition-all duration-200"
           style={{ minHeight: '48px', maxHeight: '120px' }}
           suppressHydrationWarning={true}
         />
