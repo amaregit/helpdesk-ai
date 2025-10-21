@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { RefreshCw, FileText, CheckCircle, XCircle, BarChart3, Zap, TrendingUp, Shield, Database, Upload, Activity, Settings, Users, Clock, Eye, EyeOff } from 'lucide-react';
+import { RefreshCw, FileText, CheckCircle, XCircle, BarChart3, Zap, TrendingUp, Shield, Database, Upload, Activity, Settings, Users, Clock, Eye, EyeOff, Menu, X } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 
 interface IndexStatus {
@@ -51,6 +51,7 @@ export default function AdminPage() {
   const [authToken, setAuthToken] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const loadIndexStatus = async () => {
     try {
@@ -277,17 +278,35 @@ export default function AdminPage() {
 
       {isAuthenticated && (
         <div className="flex h-screen">
+          {/* Mobile Sidebar Overlay */}
+          {isSidebarOpen && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+              onClick={() => setIsSidebarOpen(false)}
+            />
+          )}
+
           {/* Sidebar Navigation */}
-          <div className="w-64 bg-white shadow-sm border-r border-gray-200">
+          <div className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white shadow-sm border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } lg:translate-x-0`}>
             <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="h-5 w-5 text-white" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <BarChart3 className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h1 className="text-lg font-semibold text-gray-900">HelpDesk AI</h1>
+                    <p className="text-sm text-gray-500">Admin Panel</p>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-lg font-semibold text-gray-900">HelpDesk AI</h1>
-                  <p className="text-sm text-gray-500">Admin Panel</p>
-                </div>
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                >
+                  <X className="h-6 w-6" />
+                </button>
               </div>
             </div>
             <nav className="p-4 space-y-2">
@@ -315,15 +334,25 @@ export default function AdminPage() {
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 overflow-auto">
-            <div className="p-8">
+          <div className="flex-1 overflow-auto lg:ml-0">
+            <div className="p-4 lg:p-8">
               {/* Header */}
-              <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-                <p className="text-gray-600 mt-1">Manage your RAG system and monitor performance</p>
+              <div className="mb-6 lg:mb-8">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+                    <p className="text-gray-600 mt-1">Manage your RAG system and monitor performance</p>
+                  </div>
+                  <button
+                    onClick={() => setIsSidebarOpen(true)}
+                    className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  >
+                    <Menu className="h-6 w-6" />
+                  </button>
+                </div>
               </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
                   {/* Index Status Card */}
                   <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div className="flex items-center justify-between mb-4">
